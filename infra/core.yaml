@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Queue Producer Template. Includes Lambda and its Continuous Deployment.
+Resources:
+  CodeBuildRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: headless-build-role
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: codebuild.amazonaws.com
+            Action: 'sts:AssumeRole'
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess
+        # todo reduce arns.
+        # https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSCodeBuildDeveloperAccess.html
+#        - arn:aws:iam::aws:policy/AWSCodeBuildDeveloperAccess
+#        - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
